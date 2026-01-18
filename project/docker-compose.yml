@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  service-a:
+    build: ./service_a
+    ports:
+      - "8001:8000"
+    depends_on:
+      - rabbitmq
+
+  service-b:
+    build: ./service_b
+    ports:
+      - "8002:8000"
+    depends_on:
+      - rabbitmq
+
+  consumer-b:
+    build: ./consumer_b
+    depends_on:
+      - rabbitmq
+      - service-a
+    deploy:
+      replicas: 3
