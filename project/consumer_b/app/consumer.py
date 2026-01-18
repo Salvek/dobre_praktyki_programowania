@@ -31,6 +31,9 @@ def callback(ch, method, properties, body):
         print(f"[WARN] Retry: {e}")
         time.sleep(2)
 
+
+channel.basic_qos(prefetch_count=1)
+channel.queue_declare(queue="image_tasks", durable=True)
 channel.basic_qos(prefetch_count=1)
 channel.basic_consume(queue="image_tasks", on_message_callback=callback, auto_ack=False)
 

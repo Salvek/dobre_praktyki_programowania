@@ -1,5 +1,5 @@
+opencv-python
+numpy
+imutils
 pika
 requests
-opencv-python-headless
-imutils
-numpy

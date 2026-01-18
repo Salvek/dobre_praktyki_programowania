@@ -7,6 +7,7 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+
   service-a:
     build: ./service_a
     ports:
@@ -23,6 +24,8 @@ services:
 
   consumer-b:
     build: ./consumer_b
+    volumes:
+    - ./images:/images
     depends_on:
       - rabbitmq
       - service-a
